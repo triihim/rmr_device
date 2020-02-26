@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>RMR Setup</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			font-family: sans-serif, arial;
+		}
+		main { 
+			padding: 20px; 
+		}
+		label, button {
+			display: block;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<main>
+	<h1>RMR Setup</h1>
+	<form>
+		<label for="ssid">SSID</label>
+		<input type="text" id="ssid" />
+		<label for="password">Password</label>
+		<input type="password" id="password" />
+		<button type="button" id="submit">Submit</button>
+	</form>
+</main>
+
+<script type="text/javascript">
+	document.getElementById("submit").addEventListener("click", function() {
+
+		this.disabled = true;		
+
+		var ssid = document.getElementById("ssid").value;
+		var password = document.getElementById("password").value;
+	
+		var data = ssid + "|" + password;
+	
+		var xhr = new XMLHttpRequest();
+
+		xhr.addEventListener("load", function() {
+			alert("Credentials sent. This page will now go offline.");
+		});
+
+		xhr.open("POST", "/");
+		xhr.setRequestHeader("Content-Type", "text/plain");
+		xhr.overrideMimeType("text/html");
+		xhr.send(data);
+
+	});
+
+</script>
+
+</body>
+</html>
